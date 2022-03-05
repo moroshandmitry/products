@@ -1,7 +1,9 @@
-import { ColorFilter } from '../ColorFilter';
-import { RangeFilter } from '../RangeFilter';
-import { CatalogProducts } from '../CatalogProducts';
-import { Pagination } from '../Pagination';
+import {
+	ColorFilter,
+	RangeFilter,
+	CatalogProducts,
+	Pagination,
+} from '../../components';
 
 export const Catalog = () => (
 	<div className='overflow-x-hidden'>

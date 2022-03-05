@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { CatalogContext } from '../../Provider';
-import { ProductCard } from '../ProductCard';
+import { ProductCard } from '../../components';
 
 export const CatalogProducts = () => {
 	const { products, page, limitOfProductsOnPage } = useContext(CatalogContext);
