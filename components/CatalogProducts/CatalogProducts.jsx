@@ -1,23 +1,19 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useEffect } from 'react';
 import { CatalogContext } from '../../Provider';
 import { ProductCard } from '../../components';
 
 export const CatalogProducts = () => {
-	const { products, page, limitOfProductsOnPage } = useContext(CatalogContext);
-
-	const memorizedProductsOnPage = useMemo(
-		() =>
-			products
-				.map((product) => (
-					<ProductCard product={product} key={product.node.name} />
-				))
-				.splice(page * limitOfProductsOnPage, limitOfProductsOnPage),
-		[products, limitOfProductsOnPage, page]
-	);
+	const { page, limitOfProductsOnPage, selectedProductsFilter } =
+		useContext(CatalogContext);
 
 	return (
 		<div className='flex flex-wrap justify-around py-3'>
-			{memorizedProductsOnPage}
+			{selectedProductsFilter !== null &&
+				selectedProductsFilter
+					.map((product) => (
+						<ProductCard product={product} key={product.node.name} />
+					))
+					.splice(page * limitOfProductsOnPage, limitOfProductsOnPage)}
 		</div>
 	);
 };

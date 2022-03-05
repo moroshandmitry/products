@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { CatalogContext } from '../../Provider';
 import { Range, getTrackBackground } from 'react-range';
 import {
@@ -8,11 +8,18 @@ import {
 } from '../../config/constants';
 
 export const RangeFilter = () => {
-	const { products, prices } = useContext(CatalogContext);
+	const { products, prices, setSelectedProductsFilter } =
+		useContext(CatalogContext);
 	const [values, setValues] = useState([
 		firstValueBetweenRangeInput,
 		secondValueBetweenRangeInput,
 	]);
+
+	useEffect(() => {
+		filteredProductsByPrices(products);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const MIN = prices.min;
 	const MAX = prices.max;
@@ -38,7 +45,7 @@ export const RangeFilter = () => {
 			}
 		});
 
-		console.log('filteredProducts', filteredProducts);
+		setSelectedProductsFilter(filteredProducts);
 
 		return filteredProducts;
 	};

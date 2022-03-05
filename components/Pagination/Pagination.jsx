@@ -4,10 +4,12 @@ import { range } from '../../utils/range';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 
 export const Pagination = () => {
-	const { products, page, setPage, limitOfProductsOnPage } =
+	const { selectedProductsFilter, page, setPage, limitOfProductsOnPage } =
 		useContext(CatalogContext);
 
-	const pageCount = +(products.length / limitOfProductsOnPage).toFixed(0);
+	const pageCount = +(
+		selectedProductsFilter?.length / limitOfProductsOnPage
+	).toFixed(0);
 	const currentPage = page + 1;
 
 	const handleFilteredPages = (item) => {

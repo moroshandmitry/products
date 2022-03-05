@@ -25,6 +25,7 @@ function Home({ products }) {
 	const categories = useCategoryGenerator(products);
 	const prices = usePriceGenerator(products);
 	const colors = useColorsGenerator(products);
+	const [selectedProductsFilter, setSelectedProductsFilter] = useState(null);
 	const [page, setPage] = useState(0);
 
 	const provider = {
@@ -35,6 +36,8 @@ function Home({ products }) {
 		limitOfProductsOnPage, // 12
 		page, // 0
 		setPage,
+		selectedProductsFilter,
+		setSelectedProductsFilter,
 	};
 
 	return (
