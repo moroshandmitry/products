@@ -1,13 +1,14 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import header from '../public/header.jpg';
-import { createContext, useState } from 'react';
-import { productRequest } from '../components/utils/productRequest';
-import { CatalogProvider } from '../components/Provider/Provider';
-import { useCategoryGenerator } from '../components/hooks/useCategoryGenerator';
-import { usePriceGenerator } from '../components/hooks/usePriceGenerator';
-import { useColorsGenerator } from '../components/hooks/useColorsGenerator';
+import { useState } from 'react';
+import { productRequest } from '../utils/productRequest';
+import { CatalogProvider } from '../Provider/Provider';
+import { useCategoryGenerator } from '../hooks/useCategoryGenerator';
+import { usePriceGenerator } from '../hooks/usePriceGenerator';
+import { useColorsGenerator } from '..//hooks/useColorsGenerator';
 import { Catalog } from '../components/Catalog';
+import { limitOfProductsOnPage } from '../config/constants';
 
 export async function getServerSideProps(ctx) {
 	const products = await productRequest();
@@ -22,7 +23,6 @@ function Home({ products }) {
 	const categories = useCategoryGenerator(products);
 	const prices = usePriceGenerator(products);
 	const colors = useColorsGenerator(products);
-	const limit = 12;
 	const [page, setPage] = useState(0);
 
 	const provider = {
@@ -30,7 +30,7 @@ function Home({ products }) {
 		categories, // [ 'Sandals', 'Mid-Heels', 'New Arrivals' ... ]
 		prices, // { max: 520, min: 0 }
 		colors, // ['Green', 'White', 'Brown', 'Orange', 'Black', 'Natural']
-		limit, // 12
+		limitOfProductsOnPage, // 12
 		page, // 0
 		setPage,
 	};

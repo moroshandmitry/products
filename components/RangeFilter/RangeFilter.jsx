@@ -1,14 +1,12 @@
 import { useContext, useState } from 'react';
-import CatalogContext from './Provider/Provider';
+import CatalogContext from '../../Provider/Provider';
 import { Range, getTrackBackground } from 'react-range';
+import { stepOfRangeInput } from '../../config/constants';
 
 export const RangeFilter = () => {
-	const [values, setValues] = useState([100, 300]);
 	const { products, prices } = useContext(CatalogContext);
+	const [values, setValues] = useState([100, 300]);
 
-	console.log('prices', prices);
-
-	const STEP = 1;
 	const MIN = prices.min;
 	const MAX = prices.max;
 
@@ -42,7 +40,7 @@ export const RangeFilter = () => {
 		<div className='relative pt-1 flex justify-center flex-wrap'>
 			<Range
 				values={values}
-				step={STEP}
+				step={stepOfRangeInput}
 				min={MIN}
 				max={MAX}
 				onChange={(values) => {
