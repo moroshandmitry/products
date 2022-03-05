@@ -3,7 +3,7 @@ import Image from 'next/image';
 import header from '../public/header.jpg';
 import { useState } from 'react';
 import { productRequest } from '../utils/productRequest';
-import { CatalogProvider } from '../Provider/Provider';
+import { CatalogProvider } from '../Provider';
 import { useCategoryGenerator } from '../hooks/useCategoryGenerator';
 import { usePriceGenerator } from '../hooks/usePriceGenerator';
 import { useColorsGenerator } from '..//hooks/useColorsGenerator';

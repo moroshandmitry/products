@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import CatalogContext from '../../Provider/Provider';
+import { CatalogContext } from '../../Provider';
 
 export const ColorFilter = () => {
 	const { colors } = useContext(CatalogContext);

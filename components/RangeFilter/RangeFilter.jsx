@@ -1,11 +1,18 @@
 import { useContext, useState } from 'react';
-import CatalogContext from '../../Provider/Provider';
+import { CatalogContext } from '../../Provider';
 import { Range, getTrackBackground } from 'react-range';
-import { stepOfRangeInput } from '../../config/constants';
+import {
+	stepOfRangeInput,
+	firstValueBetweenRangeInput,
+	secondValueBetweenRangeInput,
+} from '../../config/constants';
 
 export const RangeFilter = () => {
 	const { products, prices } = useContext(CatalogContext);
-	const [values, setValues] = useState([100, 300]);
+	const [values, setValues] = useState([
+		firstValueBetweenRangeInput,
+		secondValueBetweenRangeInput,
+	]);
 
 	const MIN = prices.min;
 	const MAX = prices.max;

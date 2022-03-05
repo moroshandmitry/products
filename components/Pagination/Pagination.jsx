@@ -1,10 +1,11 @@
 import { useContext } from 'react';
-import CatalogContext from '../../Provider/Provider';
+import { CatalogContext } from '../../Provider';
 import { range } from '../../utils/range';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 
 export const Pagination = () => {
-	const { products, page, setPage, limitOfProductsOnPage } = useContext(CatalogContext);
+	const { products, page, setPage, limitOfProductsOnPage } =
+		useContext(CatalogContext);
 
 	const pageCount = +(products.length / limitOfProductsOnPage).toFixed(0);
 	const currentPage = page + 1;
