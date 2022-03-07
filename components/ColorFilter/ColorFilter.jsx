@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import { CatalogContext } from '../../Provider';
 
 export const ColorFilter = () => {

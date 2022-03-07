@@ -41,16 +41,30 @@ function Home({ products }) {
 	};
 
 	return (
-		<div style={{ background: '#F8F5EE' }}>
-			<Head title='Products filter' content='Product filter with pagination' />
-			<main className='container mx-auto' style={{ maxWidth: '1440px' }}>
-				<Image src={header} priority width='1440' height='553' alt='header' />
+		<>
+			<Head>
+				<title>Products filter</title>
+				<meta name='description' content='Product filter with pagination' />
+				<meta name='viewport' content='initial-scale=1.0, width=device-width' />
+				<meta httpEquiv='X-UA-Compatible' content='ie=edge' />
+				<link rel='icon' href='/favicon.ico' />
+				<meta name='robots' content='Products,filter' />
+			</Head>
 
+			<header>
+				<Image src={header} priority responsive alt='header' />
+			</header>
+
+			<main>
 				<CatalogProvider value={provider}>
 					<Catalog />
 				</CatalogProvider>
 			</main>
-		</div>
+
+			<footer className='py-5 bg-[#dcdcdc] text-center text-sm font-bold'>
+				&copy; All rights reserved! {new Date().getFullYear()}
+			</footer>
+		</>
 	);
 }
 
