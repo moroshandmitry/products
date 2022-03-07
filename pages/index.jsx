@@ -45,14 +45,13 @@ function Home({ products }) {
 			<Head>
 				<title>Products filter</title>
 				<meta name='description' content='Product filter with pagination' />
+				<meta name='keywords' content='Products,filter' />
 				<meta name='viewport' content='initial-scale=1.0, width=device-width' />
 				<meta httpEquiv='X-UA-Compatible' content='ie=edge' />
-				<link rel='icon' href='/favicon.ico' />
-				<meta name='robots' content='Products,filter' />
 			</Head>
 
 			<header>
-				<Image src={header} priority responsive alt='header' />
+				<Image src={header} priority responsive='true' alt='header' />
 			</header>
 
 			<main>
