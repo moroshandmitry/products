@@ -37,62 +37,70 @@ export const Pagination = () => {
 	const defaultPageClass = `bg-white border-gray-300 text-gray-500 hover:bg-gray-50 items-center px-3 py-2 border text-sm font-medium`;
 
 	return (
-		<nav
-			className='flex justify-center relative z-0 rounded-md shadow-sm -space-x-px py-3'
-			aria-label='Pagination'
-		>
-			<a
-				href='#'
-				className='items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
-				onClick={() => currentPage > 1 && setPage(page - 1)}
-			>
-				<ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
-			</a>
-			{currentPage > 3 && (
-				<>
-					<a href='#' className={defaultPageClass} onClick={() => setPage(0)}>
-						1
-					</a>
-					<span className='items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700'>
-						...
-					</span>
-				</>
-			)}
-			{range(1, pageCount)
-				.filter((item) => handleFilteredPages(item))
-				.map((item) => (
-					<a
-						key={item}
-						onClick={() => setPage(item - 1)}
-						href='#'
-						className={
-							item === currentPage ? activePageClass : defaultPageClass
-						}
-					>
-						{item}
-					</a>
-				))}
-			{currentPage < pageCount - 2 && (
-				<>
-					<span className='items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700'>
-						...
-					</span>
+		<>
+			{selectedProductsFilter?.length !== 0 && (
+				<nav
+					className='flex justify-center relative z-0 rounded-md shadow-sm -space-x-px py-3'
+					aria-label='Pagination'
+				>
 					<a
 						href='#'
-						className={defaultPageClass}
-						onClick={() => setPage(pageCount - 1)}
+						className='items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
+						onClick={() => currentPage > 1 && setPage(page - 1)}
 					>
-						{pageCount}
+						<ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
 					</a>
-				</>
+					{currentPage > 3 && (
+						<>
+							<a
+								href='#'
+								className={defaultPageClass}
+								onClick={() => setPage(0)}
+							>
+								1
+							</a>
+							<span className='items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700'>
+								...
+							</span>
+						</>
+					)}
+					{range(1, pageCount)
+						.filter((item) => handleFilteredPages(item))
+						.map((item) => (
+							<a
+								key={item}
+								onClick={() => setPage(item - 1)}
+								href='#'
+								className={
+									item === currentPage ? activePageClass : defaultPageClass
+								}
+							>
+								{item}
+							</a>
+						))}
+					{currentPage < pageCount - 2 && (
+						<>
+							<span className='items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700'>
+								...
+							</span>
+							<a
+								href='#'
+								className={defaultPageClass}
+								onClick={() => setPage(pageCount - 1)}
+							>
+								{pageCount}
+							</a>
+						</>
+					)}
+					<a
+						href='#'
+						className='items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
+						onClick={() => currentPage !== pageCount && setPage(page + 1)}
+					>
+						<ChevronRightIcon className='h-5 w-5' aria-hidden='true' />
+					</a>
+				</nav>
 			)}
-			<a
-				href='#'
-				className='items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
-				onClick={() => currentPage !== pageCount && setPage(page + 1)}
-			>
-				<ChevronRightIcon className='h-5 w-5' aria-hidden='true' />
-			</a>
-		</nav>
+		</>
 	);
 };
