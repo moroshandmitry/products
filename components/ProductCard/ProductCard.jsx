@@ -29,7 +29,7 @@ export const ProductCard = ({ product }) => {
 				alt={name}
 			/>
 			<div className='flex justify-between'>
-				<div className='text-sm font-bold'>{name}</div>
+				<h2 className='text-sm font-bold'>{name}</h2>
 				<div className='text-sm font-bold'>&euro;{price}</div>
 			</div>
 		</div>
