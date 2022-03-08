@@ -25,7 +25,7 @@ function Home({ products }) {
 	const categories = useCategoryGenerator(products);
 	const prices = usePriceGenerator(products);
 	const colors = useColorsGenerator(products);
-	const [selectedProductsFilter, setSelectedProductsFilter] = useState(null);
+	const [selectedProductsFilter, setSelectedProductsFilter] = useState({});
 	const [page, setPage] = useState(0);
 
 	const provider = {
