@@ -8,7 +8,7 @@ import {
 } from '../../config/constants';
 
 export const RangeFilter = () => {
-	const { products, prices, setSelectedProductsFilter } =
+	const { products, prices, setSelectedProductsFilter, setSelectedFilters } =
 		useContext(CatalogContext);
 	const [values, setValues] = useState([
 		firstValueBetweenRangeInput,
@@ -46,8 +46,6 @@ export const RangeFilter = () => {
 		});
 
 		setSelectedProductsFilter(filteredProducts);
-
-		return filteredProducts;
 	};
 
 	return (
@@ -59,6 +57,12 @@ export const RangeFilter = () => {
 				max={MAX}
 				onChange={(values) => {
 					setValues(values);
+
+					setSelectedFilters((prevState) => ({
+						pricesRange: values,
+						colors: prevState.colors,
+					}));
+
 					filteredProductsByPrices(products);
 				}}
 				renderTrack={({ props, children }) => (

@@ -2,10 +2,15 @@ import { useContext } from 'react';
 import { CatalogContext } from '../../Provider';
 
 export const ColorFilter = () => {
-	const { colors, selectedProductsFilter, setSelectedProductsFilter } =
-		useContext(CatalogContext);
+	const {
+		colors,
+		selectedProductsFilter,
+		setSelectedProductsFilter,
+		selectedFilters,
+		setSelectedFilters,
+	} = useContext(CatalogContext);
 
-	const selectColor = (productColor) => {
+	const handleSelectOrRemoveColor = (productColor) => {
 		const selectColorWithPriceRange =
 			selectedProductsFilter &&
 			selectedProductsFilter.filter((item) => {
@@ -22,8 +27,21 @@ export const ColorFilter = () => {
 					}
 				}
 			});
-
 		setSelectedProductsFilter(selectColorWithPriceRange);
+
+		setSelectedFilters((prevState) => ({
+			colors: selectedFilters.colors.concat(productColor),
+			pricesRange: prevState.pricesRange,
+		}));
+
+		if (selectedFilters.colors.indexOf(productColor) !== -1) {
+			const removeSelectedColor = selectedFilters.colors.filter((item) => {
+				if (item !== productColor) {
+					return item;
+				}
+			});
+			setSelectedFilters({ colors: removeSelectedColor });
+		}
 	};
 
 	return (
@@ -39,7 +57,7 @@ export const ColorFilter = () => {
 							type='checkbox'
 							name={color}
 							value={color}
-							onClick={() => selectColor(color)}
+							onClick={() => handleSelectOrRemoveColor(color)}
 						/>
 					</label>
 				</li>

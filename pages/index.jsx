@@ -25,6 +25,10 @@ function Home({ products }) {
 	const categories = useCategoryGenerator(products);
 	const prices = usePriceGenerator(products);
 	const colors = useColorsGenerator(products);
+	const [selectedFilters, setSelectedFilters] = useState({
+		colors: [],
+		pricesRange: [],
+	});
 	const [selectedProductsFilter, setSelectedProductsFilter] = useState({});
 	const [page, setPage] = useState(0);
 
@@ -36,8 +40,10 @@ function Home({ products }) {
 		limitOfProductsOnPage, // 12
 		page, // 0
 		setPage,
-		selectedProductsFilter,
+		selectedProductsFilter, // filtered products by prices range
 		setSelectedProductsFilter,
+		selectedFilters, // { colors: ['green'], pricesRange: [100, 333] }
+		setSelectedFilters,
 	};
 
 	return (
