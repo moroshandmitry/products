@@ -2,9 +2,15 @@ import { createContext } from 'react';
 
 export const CatalogContext = createContext({
 	products: [],
+	selectedProducts: [],
+	setSelectedProducts: () => {},
 	categories: [],
-	prices: {},
+	prices: [],
+	selectedPrices: [],
+	setSelectedPrices: () => {},
 	colors: [],
+	selectedColors: [],
+	setSelectedColors: () => {},
 	limitOfProductsOnPage: 0,
 	page: 0,
 	setPage: () => {},
@@ -13,4 +19,5 @@ export const CatalogContext = createContext({
 		pricesRange: [],
 	},
 });
+
 export const CatalogProvider = CatalogContext.Provider;
