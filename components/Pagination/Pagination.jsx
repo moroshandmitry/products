@@ -4,11 +4,11 @@ import { range } from '../../utils/range';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 
 export const Pagination = () => {
-	const { selectedProductsFilter, page, setPage, limitOfProductsOnPage } =
+	const { selectedProducts, page, setPage, limitOfProductsOnPage } =
 		useContext(CatalogContext);
 
 	const pageCount = +(
-		selectedProductsFilter?.length / limitOfProductsOnPage
+		selectedProducts?.length / limitOfProductsOnPage
 	).toFixed(0);
 	const currentPage = page + 1;
 
@@ -38,7 +38,7 @@ export const Pagination = () => {
 
 	return (
 		<>
-			{selectedProductsFilter?.length !== 0 && (
+			{selectedProducts?.length !== 0 && (
 				<nav
 					className='flex justify-center relative z-0 rounded-md shadow-sm -space-x-px py-3'
 					aria-label='Pagination'

@@ -4,44 +4,14 @@ import { CatalogContext } from '../../Provider';
 export const ColorFilter = () => {
 	const {
 		colors,
-		selectedProductsFilter,
-		setSelectedProductsFilter,
-		selectedFilters,
-		setSelectedFilters,
+		setSelectedColors,
+		selectedColors
 	} = useContext(CatalogContext);
 
 	const handleSelectOrRemoveColor = (productColor) => {
-		const selectColorWithPriceRange =
-			selectedProductsFilter &&
-			selectedProductsFilter.filter((item) => {
-				const {
-					node: { colorFamily },
-				} = item;
+		const isColorExist = Boolean(selectedColors.find(item => item === productColor));
 
-				if (colorFamily) {
-					const [itemColor] = colorFamily;
-					const { name: color } = itemColor;
-
-					if (color === productColor) {
-						return item;
-					}
-				}
-			});
-		setSelectedProductsFilter(selectColorWithPriceRange);
-
-		setSelectedFilters((prevState) => ({
-			colors: selectedFilters.colors.concat(productColor),
-			pricesRange: prevState.pricesRange,
-		}));
-
-		if (selectedFilters.colors.indexOf(productColor) !== -1) {
-			const removeSelectedColor = selectedFilters.colors.filter((item) => {
-				if (item !== productColor) {
-					return item;
-				}
-			});
-			setSelectedFilters({ colors: removeSelectedColor });
-		}
+		setSelectedColors(isColorExist ? selectedColors.filter(item => item !== productColor) : [...selectedColors, productColor])
 	};
 
 	return (

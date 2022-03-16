@@ -3,67 +3,30 @@ import { CatalogContext } from '../../Provider';
 import { Range, getTrackBackground } from 'react-range';
 import {
 	stepOfRangeInput,
-	firstValueBetweenRangeInput,
-	secondValueBetweenRangeInput,
 } from '../../config/constants';
 
 export const RangeFilter = () => {
-	const { products, prices, setSelectedProductsFilter, setSelectedFilters } =
-		useContext(CatalogContext);
-	const [values, setValues] = useState([
-		firstValueBetweenRangeInput,
-		secondValueBetweenRangeInput,
-	]);
+	const { products, prices, selectedPrices, setSelectedPrices } = useContext(CatalogContext);
 
-	useEffect(() => {
-		filteredProductsByPrices(products);
+	const setRangeValues = (values) => {
+		setSelectedPrices(values)
+	}
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	const MIN = prices.min;
 	const MAX = prices.max;
 
-	const filteredProductsByPrices = (products) => {
-		const filteredProducts = products.filter((product) => {
-			const {
-				node: {
-					shopifyProductEu: {
-						variants: { edges },
-					},
-				},
-			} = product;
-
-			const [x, y] = values;
-			const [edge] = edges;
-
-			if (
-				+edge?.node.price >= Math.floor(x) &&
-				+edge?.node.price <= Math.floor(y)
-			) {
-				return product;
-			}
-		});
-
-		setSelectedProductsFilter(filteredProducts);
-	};
+	const rangeValues = selectedPrices.length ? selectedPrices : [MIN, MAX]
 
 	return (
 		<div className='relative pt-1 flex justify-center flex-wrap'>
 			<Range
-				values={values}
+				values={rangeValues}
 				step={stepOfRangeInput}
 				min={MIN}
 				max={MAX}
 				onChange={(values) => {
-					setValues(values);
-
-					setSelectedFilters((prevState) => ({
-						pricesRange: values,
-						colors: prevState.colors,
-					}));
-
-					filteredProductsByPrices(products);
+					setRangeValues(values);
 				}}
 				renderTrack={({ props, children }) => (
 					<div
@@ -83,7 +46,7 @@ export const RangeFilter = () => {
 								width: '100%',
 								borderRadius: '4px',
 								background: getTrackBackground({
-									values,
+									values: rangeValues,
 									colors: ['#ccc', '#548BF4', '#ccc'],
 									min: MIN,
 									max: MAX,

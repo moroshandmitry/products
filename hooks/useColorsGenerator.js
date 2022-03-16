@@ -18,8 +18,7 @@ export const useColorsGenerator = (products) =>
 			}
 		}
 
-		const uniqColors = new Set(colors);
-		const uniqColorsArray = [...uniqColors];
+		const uniqColorsArray = [...new Set(colors)];
 
 		return uniqColorsArray;
 	}, [products]);

@@ -5,12 +5,12 @@ import { ProductCard } from '../../components';
 import productNotFound from '../../public/product-not-found.png';
 
 export const CatalogProducts = () => {
-	const { page, limitOfProductsOnPage, selectedProductsFilter } =
+	const { page, limitOfProductsOnPage, selectedProductsFilter, selectedProducts } =
 		useContext(CatalogContext);
 
 	return (
 		<div className='flex flex-wrap justify-around py-3'>
-			{!selectedProductsFilter?.length ? (
+			{!selectedProducts?.length ? (
 				<Image
 					src={productNotFound}
 					width='450'
@@ -18,7 +18,7 @@ export const CatalogProducts = () => {
 					alt='product-not-found'
 				/>
 			) : (
-				selectedProductsFilter
+				selectedProducts
 					.map((product) => (
 						<ProductCard product={product} key={product.node.name} />
 					))

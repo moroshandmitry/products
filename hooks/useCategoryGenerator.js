@@ -12,8 +12,7 @@ export const useCategoryGenerator = (products) =>
 			}
 		}
 
-		const uniqCategories = new Set(categories);
-		const uniqCategoriesArray = [...uniqCategories];
+		const uniqCategoriesArray = [...new Set(categories)];
 
 		return uniqCategoriesArray;
 	}, [products]);

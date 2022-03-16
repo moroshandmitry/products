@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { CatalogProvider } from '../Provider';
 import { productRequest } from '../utils/productRequest';
+import getSelectedProducts from '../utils/getSelectedProducts'
 import {
 	useCategoryGenerator,
 	useColorsGenerator,
@@ -22,25 +23,37 @@ export async function getServerSideProps(ctx) {
 }
 
 function Home({ products }) {
+	const [selectedProducts, setSelectedProducts] = useState(products)
 	const categories = useCategoryGenerator(products);
 	const prices = usePriceGenerator(products);
 	const colors = useColorsGenerator(products);
-	const [selectedFilters, setSelectedFilters] = useState({
-		colors: [],
-		pricesRange: [],
-	});
-	const [selectedProductsFilter, setSelectedProductsFilter] = useState({});
+	const [selectedColors, setSelectedColors] = useState([])
+	const [selectedPrices, setSelectedPrices] = useState([])
+	const [lalala, setSelectedFilters] = useState([])
+	const [selectedProductsFilter, setSelectedProductsFilter] = useState([]);
+	const selectedFilters = useMemo(() => ({ colors: selectedColors, prices: selectedPrices }), [selectedColors, selectedPrices])
+
+	useEffect(() => {
+		setSelectedProducts(getSelectedProducts(products, selectedFilters));
+	}, [selectedFilters, products])
+
 	const [page, setPage] = useState(0);
 
 	const provider = {
-		products, // [{ node: { name, node_locale, thumbnailImage, colorFamily, categoryTags, shopifyProductEu } } ... ],
+		products,
+		selectedProducts,
+		setSelectedProducts,
 		categories, // [ 'Sandals', 'Mid-Heels', 'New Arrivals' ... ]
-		prices, // { max: 520, min: 0 }
-		colors, // ['Green', 'White', 'Brown', 'Orange', 'Black', 'Natural']
+		prices,
+		selectedPrices,
+		setSelectedPrices,
+		colors,
+		selectedColors,
+		setSelectedColors,
 		limitOfProductsOnPage, // 12
 		page, // 0
 		setPage,
-		selectedProductsFilter, // filtered products by prices range
+		selectedProductsFilter, // [ {}, {}, {} ... ] filtered products by prices range
 		setSelectedProductsFilter,
 		selectedFilters, // { colors: ['green'], pricesRange: [100, 333] }
 		setSelectedFilters,
