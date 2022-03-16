@@ -6,7 +6,7 @@ import {
 } from '../../config/constants';
 
 export const RangeFilter = () => {
-	const { products, prices, selectedPrices, setSelectedPrices } = useContext(CatalogContext);
+	const { prices, selectedPrices, setSelectedPrices } = useContext(CatalogContext);
 
 	const setRangeValues = (values) => {
 		setSelectedPrices(values)

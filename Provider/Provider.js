@@ -8,12 +8,9 @@ export const CatalogContext = createContext({
 	limitOfProductsOnPage: 0,
 	page: 0,
 	setPage: () => {},
-	selectedProductsFilter: [],
-	setSelectedProductsFilter: () => {},
 	selectedFilters: {
 		colors: [],
 		pricesRange: [],
 	},
-	setSelectedFilters: () => {},
 });
 export const CatalogProvider = CatalogContext.Provider;

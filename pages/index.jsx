@@ -29,8 +29,6 @@ function Home({ products }) {
 	const colors = useColorsGenerator(products);
 	const [selectedColors, setSelectedColors] = useState([])
 	const [selectedPrices, setSelectedPrices] = useState([])
-	const [lalala, setSelectedFilters] = useState([])
-	const [selectedProductsFilter, setSelectedProductsFilter] = useState([]);
 	const selectedFilters = useMemo(() => ({ colors: selectedColors, prices: selectedPrices }), [selectedColors, selectedPrices])
 
 	useEffect(() => {
@@ -43,20 +41,17 @@ function Home({ products }) {
 		products,
 		selectedProducts,
 		setSelectedProducts,
-		categories, // [ 'Sandals', 'Mid-Heels', 'New Arrivals' ... ]
+		categories,
 		prices,
 		selectedPrices,
 		setSelectedPrices,
 		colors,
 		selectedColors,
 		setSelectedColors,
-		limitOfProductsOnPage, // 12
-		page, // 0
+		limitOfProductsOnPage,
+		page,
 		setPage,
-		selectedProductsFilter, // [ {}, {}, {} ... ] filtered products by prices range
-		setSelectedProductsFilter,
-		selectedFilters, // { colors: ['green'], pricesRange: [100, 333] }
-		setSelectedFilters,
+		selectedFilters,
 	};
 
 	return (

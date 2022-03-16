@@ -5,7 +5,7 @@ import { ProductCard } from '../../components';
 import productNotFound from '../../public/product-not-found.png';
 
 export const CatalogProducts = () => {
-	const { page, limitOfProductsOnPage, selectedProductsFilter, selectedProducts } =
+	const { page, limitOfProductsOnPage, selectedProducts } =
 		useContext(CatalogContext);
 
 	return (
